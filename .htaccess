@@ -1,6 +1,9 @@
 # omogućiti URL rewrite
 RewriteEngine On
 
+# preskočiti ukoliko postoji datoteka
+RewriteCond %{REQUEST_FILENAME} !-f
+
 
 # svi zahtjevi idu na index.php
 RewriteRule (.*) index.php [L,E=PATH_INFO:/$1]
