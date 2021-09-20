@@ -1,0 +1,35 @@
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"><?=App::config('nazivApp')?></li>
+      <li><a href="<?=App::config('url')?>">Početna</a></li>
+      <?php if(Request::isAutoriziran()): ?>
+        <li><a href="<?=App::config('url')?>nadzornaploca/index">Nadzorna ploča</a></li>
+        <li>
+          <a href="#">Programi</a>
+          <ul class="menu vertical">
+            <li><a href="<?=App::config('url')?>smjer/index">Smjerovi</a></li>
+            <li><a href="#">Predavači</a></li>
+            <li><a href="#">Polaznici</a></li>
+            <li><a href="#">Grupe</a></li>
+            <?php if(Request::isAdmin()): ?>
+              <li><a href="#">Operateri</a></li>
+            <?php endif; ?>
+          </ul>
+        </li>
+      <?php endif; ?>
+      <li><a href="<?=App::config('url')?>index/onama">O nama</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li>
+      <?php if(!Request::isAutoriziran()): ?>
+        <a href="<?=App::config('url')?>index/login">Login</a>
+      <?php else:?>
+        <a href="<?=App::config('url')?>index/logout">Odjava <?=Request::user()?></a>
+      <?php endif; ?>
+      </li>
+    </ul>
+  </div>
+</div>

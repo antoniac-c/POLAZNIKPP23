@@ -1,0 +1,47 @@
+<div class="grid-x">
+  <div class="cell large-6">
+    <h1 style="font-size: 1rem;">Smjerovi</h1>
+  </div>
+  <div class="cell large-6" style="text-align: right;">
+    <a href="<?=App::config('url')?>smjer/novi">
+        <i title="Dodaj novi" style="color: green;" 
+        class="fas fa-2x fa-plus"></i>
+    </a>
+  </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Trajanje</th>
+            <th>Cijena</th>
+            <th>Certifikat</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($smjerovi as $smjer): ?>
+            <tr>
+                <td><?=$smjer->naziv?></td>
+                <td><?=$smjer->trajanje?></td>
+                <td><?=$smjer->cijena?></td>
+                <td><?=$smjer->certifikat?></td>
+                <td>
+                    <a href="<?=App::config('url')?>smjer/promjena?sifra=<?=$smjer->sifra?>">
+                        <i title="Promjena" class="fas fa-2x fa-pencil-alt"></i>
+                    </a>
+                    <?php if($smjer->grupa==0): ?>
+                    <a 
+                    onclick="return confirm('Sigurno obrisati smjer &#34;<?=$smjer->naziv?>&#34;?');"
+                    href="<?=App::config('url')?>smjer/brisanje?sifra=<?=$smjer->sifra?>">
+                        <i title="Brisanje" style="color: red; margin-left: 20px;" class="fas fa-2x fa-trash-alt"></i>
+                    </a>
+                    <?php else:?>
+                        <i title="Ne može se obrisati jer ima grupa(<?=$smjer->grupa?>) koje su prijavljene na ovom smjeru" style="color: gray; margin-left: 20px;" class="fas fa-2x fa-trash-alt"></i>
+                    <?php endif;?>
+                </td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
